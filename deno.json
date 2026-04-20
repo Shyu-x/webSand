@@ -1,0 +1,33 @@
+{
+  "$schema": "https://deno.land/schema/deno.json",
+  "imports": {
+    "@std/http": "jsr:@std/http@^1",
+    "@std/path": "jsr:@std/path@^1",
+    "@std/fs": "jsr:@std/fs@^1",
+    "@std/encoding": "jsr:@std/encoding@^1"
+  },
+  "tasks": {
+    "dev": "deno run -A --watch=src/,public/ dev.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "deno run -A --watch=dist/ dev.ts",
+    "deploy:local": "deno run -A dev.ts",
+    "check": "deno check src/**/*.ts && deno check src/**/*.tsx",
+    "fmt": "deno fmt .",
+    "lint": "deno lint .",
+    "prebuild:packages": "deno run -A scripts/prebuild-packages.ts",
+    "verify:react-main-sync": "deno run -A scripts/verify-react-main-sync.ts"
+  },
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  },
+  "deploy": {
+    "runtime": {
+      "type": "dynamic",
+      "entrypoint": "deploy.ts",
+      "memory": 512
+    }
+  },
+  "nodeModulesDir": "auto"
+}
